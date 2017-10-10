@@ -5,11 +5,22 @@ const Hapi = require('hapi');
 const server = new Hapi.Server();
 server.connection({ port: process.env.PORT || 4000 });
 
-server.register(require('inert'), err=> {
+//initialising inert and vision plugins
+server.register([require('inert'), require('vision')], err=> {
 
   if (err) {
     throw err;
   }
+
+  //assign handlebars engine for views to the server
+  server.views({
+    engines: {
+      hbs: require('handlebars'),
+    },
+    relativeTo: __dirname,
+    path: './app/views',
+    isCached: false,
+  });
 
   server.route(require('./routes'));
 

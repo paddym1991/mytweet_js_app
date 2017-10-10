@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/paddym1991/mytweet_js_app#readme",
   "dependencies": {
+    "handlebars": "^4.0.10",
     "hapi": "^16.6.2",
-    "inert": "^4.2.1"
+    "inert": "^4.2.1",
+    "vision": "^4.1.1"
   }
 }
