@@ -1,7 +1,7 @@
-const Controller = require('./controller.js');
+const Tweets = require('./app/controllers/tweets');
 
 module.exports = [
 
-  { method: 'GET', path: '/', config: Controller.index },
+  { method: 'GET', path: '/', config: Tweets.home },
 
 ];

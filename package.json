@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/paddym1991/mytweet_js_app#readme",
   "dependencies": {
-    "hapi": "^16.6.2"
+    "hapi": "^16.6.2",
+    "inert": "^4.2.1"
   }
 }
