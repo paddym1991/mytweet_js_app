@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/paddym1991/mytweet_js_app/issues"
   },
-  "homepage": "https://github.com/paddym1991/mytweet_js_app#readme"
+  "homepage": "https://github.com/paddym1991/mytweet_js_app#readme",
+  "dependencies": {
+    "hapi": "^16.6.2"
+  }
 }
