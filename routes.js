@@ -9,7 +9,11 @@ module.exports = [
   {
     method: 'GET',
     path: '/{param*}',
-    config: {auth: false },
+    config: { auth: false },
     handler: Assets.servePublicDirectory,
   },
+
+  { method: 'GET', path: '/signup', config: Tweets.signup },
+  { method: 'GET', path: '/login', config: Tweets.login },
+
 ];
