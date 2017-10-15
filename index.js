@@ -5,6 +5,11 @@ const Hapi = require('hapi');
 const server = new Hapi.Server();
 server.connection({ port: process.env.PORT || 4000 });
 
+//store some of the tweets the user makes in an simple array
+server.bind({
+  tweets: [],
+});
+
 //initialising inert and vision plugins
 server.register([require('inert'), require('vision')], err=> {
 

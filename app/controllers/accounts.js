@@ -3,7 +3,7 @@
 exports.main = {
 
   handler: function (request, reply) {
-    reply.view('main', { title: 'Welcome to Donations' });
+    reply.view('main', { title: 'Welcome to MyTweet' });
   },
 
 };
