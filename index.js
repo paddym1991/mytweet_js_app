@@ -5,8 +5,11 @@ const Hapi = require('hapi');
 const server = new Hapi.Server();
 server.connection({ port: process.env.PORT || 4000 });
 
-//store some of the tweets the user makes in an simple array
+/**
+ * store a list of users and tweets in a simple array
+ */
 server.bind({
+  users: [],
   tweets: [],
 });
 

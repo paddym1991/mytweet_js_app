@@ -16,6 +16,18 @@ exports.signup = {
 
 };
 
+/**
+ * Handler for populating users array (register)
+ * @type {{handler: exports.register.handler}}
+ */
+exports.register = {
+
+  handler: function  (request, reply) {
+    reply.redirect('/home');
+  },
+
+};
+
 exports.login = {
 
   handler: function (request, reply) {
