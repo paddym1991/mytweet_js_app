@@ -1,23 +1,27 @@
+<!--refactor the tweets controller to support making and listing donations-->
+
 'use strict';
 
 exports.home = {
 
-  handler: (request, reply) => {
-    reply.view('main', { title: 'Welcome to Tweeterville' });   //refactor controller to pass actual title to the view when rendered
+  handler: function (request, reply) {
+    reply.view('home', { title: 'Welcome to Tweeterville' });
   },
+
 };
 
-exports.signup = {
+exports.timeline = {
 
-  handler: (request, reply) => {
-    reply.view('signup', { title: 'Sign up for MyTweet' });   //refactor controller to pass actual title to the view when rendered
+  handler: function (request, reply) {
+    reply.view('report', { title: 'Tweets to Date', });
   },
+
 };
 
-exports.login = {
+exports.tweet = {
 
-  handler: (request, reply) => {
-    reply.view('login', { title: 'Login to MyTweet' });   //refactor controller to pass actual title to the view when rendered
+  handler: function (request, reply) {
+    reply.redirect('/timeline');
   },
-};
 
+};
