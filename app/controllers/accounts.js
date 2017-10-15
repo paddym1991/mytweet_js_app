@@ -23,7 +23,7 @@ exports.signup = {
 exports.register = {
 
   handler: function  (request, reply) {
-    reply.redirect('/home');
+    reply.redirect('/login');
   },
 
 };
