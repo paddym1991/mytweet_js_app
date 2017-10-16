@@ -23,6 +23,10 @@ exports.signup = {
 exports.register = {
 
   handler: function  (request, reply) {
+    const user = request.payload;
+    this.users[user.email] = user;
+    console.log('this is registering');
+    console.log(user);
     reply.redirect('/login');
   },
 
@@ -39,7 +43,16 @@ exports.login = {
 exports.authenticate = {
 
   handler: function (request, reply) {
-    reply.redirect('/home');
+    const user = request.payload;
+    if ((user.email in this.users) && (user.password === this.users[user.email].password)) {
+      this.currentUser = this.users[user.email];
+      console.log('this is authenticating');
+      console.log(this.currentUser);
+      reply.redirect('/home');
+    }
+    else {
+      reply.redirect('/signup');
+    }
   },
 
 };

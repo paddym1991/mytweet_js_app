@@ -9,6 +9,7 @@ server.connection({ port: process.env.PORT || 4000 });
  * store a list of users and tweets in a simple array
  */
 server.bind({
+  currentUser: {},
   users: [],
   tweets: [],
 });
