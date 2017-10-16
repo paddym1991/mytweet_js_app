@@ -22,5 +22,7 @@ module.exports = [
   { method: 'POST', path: '/login', config: Accounts.authenticate },
   { method: 'GET', path: '/logout', config: Accounts.logout },
   { method: 'POST', path: '/register', config: Accounts.register },   //Post route to register users
+  { method: 'GET', path: '/settings', config: Accounts.viewSettings },
+  { method: 'POST', path: '/settings', config: Accounts.updateSettings },
 
 ];

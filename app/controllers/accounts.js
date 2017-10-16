@@ -75,3 +75,31 @@ exports.logout = {
   },
 
 };
+
+/**
+ * Handler to view settings page
+ * @type {{handler: exports.viewSettings.handler}}
+ */
+exports.viewSettings = {
+
+  handler: function (request, reply) {
+    const userEmail = request.auth.credentials.loggedInUser;
+    const currentUserDetails = this.users[userEmail];
+    reply.view('settings', { title: 'Edit Account Settings', user: currentUserDetails });
+  },
+
+};
+
+/**
+ * Handler to update settings
+ * @type {{handler: exports.updateSettings.handler}}
+ */
+exports.updateSettings = {
+
+  handler: function (request, reply) {
+    const user = request.payload;
+    this.users[user.email] = user;
+    reply.redirect('/settings');
+  },
+
+};
