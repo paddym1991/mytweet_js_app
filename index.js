@@ -14,8 +14,8 @@ server.bind({
   tweets: [],
 });
 
-//initialising inert and vision plugins
-server.register([require('inert'), require('vision')], err=> {
+//initialising/registering inert, vision and cookie plugins
+server.register([require('inert'), require('vision'), require('hapi-auth-cookie')], err=> {
 
   if (err) {
     throw err;
@@ -33,6 +33,13 @@ server.register([require('inert'), require('vision')], err=> {
     partialsPath: './app/views/partials',
     layout: true,
     isCached: false,
+  });
+
+  server.auth.strategy('standard', 'cookie', {
+    password: 'secretpasswordnotrevealedtoanyone',
+    cookie: 'donation-cookie',
+    isSecure: false,
+    ttl: 24 * 60 * 60 * 1000,
   });
 
   server.route(require('./routes'));
