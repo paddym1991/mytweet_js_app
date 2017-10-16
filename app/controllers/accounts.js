@@ -2,6 +2,7 @@
 
 exports.main = {
 
+  auth: false,
   handler: function (request, reply) {
     reply.view('main', { title: 'Welcome to MyTweet' });
   },
@@ -10,6 +11,7 @@ exports.main = {
 
 exports.signup = {
 
+  auth: false,
   handler: function (request, reply) {
     reply.view('signup', { title: 'Sign up for MyTweet' });   //refactor controller to pass actual title to the view when rendered
   },
@@ -22,6 +24,7 @@ exports.signup = {
  */
 exports.register = {
 
+  auth: false,
   handler: function  (request, reply) {
     const user = request.payload;
     this.users[user.email] = user;
@@ -34,6 +37,7 @@ exports.register = {
 
 exports.login = {
 
+  auth: false,
   handler: function (request, reply) {
     reply.view('login', { title: 'Login to MyTweet' });   //refactor controller to pass actual title to the view when rendered
   },
@@ -42,6 +46,7 @@ exports.login = {
 
 exports.authenticate = {
 
+  auth: false,
   handler: function (request, reply) {
     const user = request.payload;
     if ((user.email in this.users) && (user.password === this.users[user.email].password)) {
@@ -59,6 +64,7 @@ exports.authenticate = {
 
 exports.logout = {
 
+  auth: false,
   handler: function (request, reply) {
     reply.redirect('/');
   },
