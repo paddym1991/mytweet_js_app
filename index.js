@@ -35,11 +35,15 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
     isCached: false,
   });
 
+  /**
+   * Defining cookie strategy
+   */
   server.auth.strategy('standard', 'cookie', {
     password: 'secretpasswordnotrevealedtoanyone',
     cookie: 'tweet-cookie',
     isSecure: false,
     ttl: 24 * 60 * 60 * 1000,
+    redirectTo: '/login',     //if cookie expires or gets deleted redirect user to login page.
   });
 
   //Cookie set as strategy for all routes.
