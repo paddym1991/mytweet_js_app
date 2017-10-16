@@ -27,7 +27,8 @@ exports.tweet = {
 
   handler: function (request, reply) {
     let data = request.payload;
-    data.tweeter = this.currentUser;    //setting current user as tweeter
+    const tweeterEmail = request.auth.credentials.loggedInUser; //recover tweeter email from cookie
+    data.tweeter = this.users[tweeterEmail];    //setting current user as tweeter
     this.tweets.push(data);
     reply.redirect('/timeline');
   },
