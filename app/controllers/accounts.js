@@ -50,6 +50,10 @@ exports.authenticate = {
   handler: function (request, reply) {
     const user = request.payload;
     if ((user.email in this.users) && (user.password === this.users[user.email].password)) {
+      request.cookieAuth.set({      //setting a session cookie after user credentials are verified
+        loggedIn: true,
+        loggedInUser: user.email,
+      });
       this.currentUser = this.users[user.email];
       console.log('this is authenticating');
       console.log(this.currentUser);
@@ -66,6 +70,7 @@ exports.logout = {
 
   auth: false,
   handler: function (request, reply) {
+    request.cookieAuth.clear();   //clear the session(clear cookie) upon logout
     reply.redirect('/');
   },
 
