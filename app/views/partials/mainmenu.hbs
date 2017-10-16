@@ -1,0 +1,14 @@
+<nav class="ui inverted menu">
+  <header class="header item"><a href="/"> MyTweet </a></header>
+  <div class="right menu">
+    <a id="home"   class= "item" href="/home"> Tweet</a>
+    <a id="timeline" class= "item" href="/timeline"> Timeline</a>
+    <a id="logout" class= "item" href="/logout"> Logout</a>
+  </div>
+</nav>
+
+<!--active item passed as a parameter to the partial.
+   active item set based on the parameter-->
+<script>
+  $("#{{_id}}").addClass("active item");      //set the active class for the menu item with the id '_id'
+</script>
