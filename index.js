@@ -37,7 +37,7 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
 
   server.auth.strategy('standard', 'cookie', {
     password: 'secretpasswordnotrevealedtoanyone',
-    cookie: 'donation-cookie',
+    cookie: 'tweet-cookie',
     isSecure: false,
     ttl: 24 * 60 * 60 * 1000,
   });
