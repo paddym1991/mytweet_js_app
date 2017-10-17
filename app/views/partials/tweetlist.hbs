@@ -7,7 +7,7 @@
       <table class="ui celled table segment">
         <thead>
         <tr>
-          <th>Amount</th>
+          <th>Tweet</th>
           <th>Method donated</th>
           <th>Posted By</th>
         </tr>
@@ -15,7 +15,7 @@
         <tbody>
         {{#each tweets}}
           <tr>
-            <td> {{amount}} </td>
+            <td> {{tweetText}} </td>
             <td> {{method}} </td>
             <td> {{tweeter.firstName}} {{tweeter.lastName}} </td>
           </tr>

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
  */
 
 const tweetSchema = mongoose.Schema({
-  amount: Number,
+  tweetText: String,
   method: String,
 });
 
