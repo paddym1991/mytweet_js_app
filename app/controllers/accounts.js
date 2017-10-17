@@ -87,29 +87,43 @@ exports.logout = {
 };
 
 /**
- * Handler to view settings page
+ * Handler to view settings page of user retrieved from database
  * @type {{handler: exports.viewSettings.handler}}
  */
 exports.viewSettings = {
 
   handler: function (request, reply) {
     const userEmail = request.auth.credentials.loggedInUser;
-    const currentUserDetails = this.users[userEmail];
-    reply.view('settings', { title: 'Edit Account Settings', user: currentUserDetails });
+    User.findOne({ email: userEmail }).then(foundUser => {
+      reply.view('settings', { title: 'Edit Account Settings', user: foundUser });
+    }).catch(err => {
+      reply.redirect('/');
+    });
   },
 
 };
 
 /**
  * Handler to update settings
+ * Read a users details from the database, and then update with new values entered by the user
  * @type {{handler: exports.updateSettings.handler}}
  */
 exports.updateSettings = {
 
   handler: function (request, reply) {
-    const user = request.payload;
-    this.users[user.email] = user;
-    reply.redirect('/settings');
+    const editedUser = request.payload;
+    const loggedInUserEmail = request.auth.credentials.loggedInUser;
+    User.findOne({ email: loggedInUserEmail }).then(user => {
+      user.firstName = editedUser.firstName;
+      user.lastName = editedUser.lastName;
+      user.email = editedUser.email;
+      user.password = editedUser.password;
+      return user.save();     //return a promise from the save() function - and then re render the updated user details to the settings view.
+    }).then(user => {
+      console.log(user.firstName + "'s account edited");
+      console.log(user);
+      reply.view('settings', { title: 'Edit Account Settings', user: user });
+      });
   },
 
 };
