@@ -1,8 +1,16 @@
 <section class="ui raised segment">
   <div class="ui grid ">
     <div class="ui form six wide column">
-      <div class="ui stacked segment">
+      <div class="ui segment">
         <form action="/tweet" method="POST">
+          <div class="field">
+            <label>Tweet</label>
+            <textarea id="data" rows="4" placeholder="What's on your mind?" type="text" name="tweetText" maxlength="140" ></textarea>
+          </div>
+
+          <span id="chars" class="ui basic label">140</span> characters remaining
+
+          <!--
           <div class="ui dropdown" name="amount">
             <input type="hidden" name="amount">
             <div class="text">Select Tweet</div>
@@ -26,8 +34,10 @@
                 <label>Direct</label>
               </div>
             </div>
-          </div>
+          </div> -->
+          <div>
           <button class="ui blue submit button">Tweet</button>
+          </div>
         </form>
       </div>
     </div>
@@ -37,3 +47,13 @@
   </div>
 </section>
 
+
+<!--http://geoffmuskett.com/really-simple-jquery-character-countdown-in-textarea/-->
+<script>
+  var maxLength = 140;
+$('textarea').keyup(function() {
+  var length = $(this).val().length;
+  var length = maxLength-length;
+  $('#chars').text(length);
+});
+</script>
