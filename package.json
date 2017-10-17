@@ -17,10 +17,16 @@
   },
   "homepage": "https://github.com/paddym1991/mytweet_js_app#readme",
   "dependencies": {
-    "handlebars": "^4.0.10",        //installed handlebars engine 'npm install handlebars -save'
-    "hapi": "^16.6.2",              //installed HAPI plugin 'npm install hapi -save'
+    "handlebars": "^4.0.10",    //installed handlebars engine 'npm install handlebars -save'
+    "hapi": "^16.6.2",    //installed HAPI plugin 'npm install hapi -save'
     "hapi-auth-cookie": "^7.0.0",   //installed cookie plugin 'npm install hapi-auth-cookie -save'
-    "inert": "^4.2.1",              //intalled inert plugin 'npm install inert -save'
-    "vision": "^4.1.1"              //installed vision plugin 'npm install viaion -save'
+    "inert": "^4.2.1",    //intalled inert plugin 'npm install inert -save'
+    "mongoose": "^4.12.3",    //installed mongoose framework 'npm install mongoose -save'
+    "vision": "^4.1.1"    //installed vision plugin 'npm install viaion -save'
   }
 }
+
+
+
+
+

@@ -8,11 +8,14 @@ server.connection({ port: process.env.PORT || 4000 });
 /**
  * store a list of users and tweets in a simple array
  */
-server.bind({
-  //currentUser: {},   //will be using alternative mechanism to track the user
-  users: {},    //changed users to store an object instead of array
-  tweets: [],
-});
+//server.bind({
+//currentUser: {},   //will be using alternative mechanism to track the user
+// users: {},    //changed users to store an object instead of array
+// tweets: [],
+//});
+
+//deleted existing server objects above and replaced with an import of the db just created
+require('./app/models/db');
 
 //initialising/registering inert, vision and cookie plugins
 server.register([require('inert'), require('vision'), require('hapi-auth-cookie')], err=> {
