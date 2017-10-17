@@ -22,7 +22,7 @@ exports.signup = {
 };
 
 /**
- * Handler for populating users array (register)
+ * Handler for populating users in database
  * @type {{handler: exports.register.handler}}
  */
 exports.register = {

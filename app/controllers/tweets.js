@@ -2,6 +2,9 @@
 
 'use strict';
 
+//tweet controller can now require the tweet model
+const Tweet = require('../models/tweet');
+
 exports.home = {
 
   handler: function (request, reply) {
@@ -10,27 +13,35 @@ exports.home = {
 
 };
 
-//retrieve tweets array
+//updates timeline handler to use Tweet model
 exports.timeline = {
 
   handler: function (request, reply) {
-    reply.view('timeline', {
-      title: 'Tweets to Date',
-      tweets: this.tweets,
+    Tweet.find({}).exec().then(allTweets => {
+      reply.view('timeline', {
+        title: 'Tweets to date',
+        tweets: allTweets,
+      });
+    }).catch(err => {
+      reply.redirect('/');
     });
   },
 
 };
 
-//store tweet in tweets array (created in index.js)
+
+//updated tweet handler to use Tweet model
 exports.tweet = {
 
   handler: function (request, reply) {
     let data = request.payload;
-    const tweeterEmail = request.auth.credentials.loggedInUser; //recover tweeter email from cookie
-    data.tweeter = this.users[tweeterEmail];    //setting current user as tweeter
-    this.tweets.push(data);
-    reply.redirect('/timeline');
+    const tweet = new Tweet(data);
+    tweet.save().then(newTweet => {
+      reply.redirect('/timeline');
+    }).catch(err => {
+      reply.redirect('/');
+    });
   },
 
 };
+
