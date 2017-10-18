@@ -18,7 +18,7 @@ exports.home = {
 exports.timeline = {
 
   handler: function (request, reply) {
-    Tweet.find({}).exec().then(allTweets => {
+    Tweet.find({}).populate('tweeter').then(allTweets => {    //minor update to the timeline handler - with a populate('tweeter') call inserted into the query
       reply.view('timeline', {
         title: 'Tweets to date',
         tweets: allTweets,
