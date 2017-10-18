@@ -4,6 +4,7 @@
 
 //tweet controller can now require the tweet model
 const Tweet = require('../models/tweet');
+const User = require('../models/user');   //To gain access to the object reference (user)
 
 exports.home = {
 
@@ -30,13 +31,17 @@ exports.timeline = {
 };
 
 
-//updated tweet handler to use Tweet model
+//Reimplement the tweet handler to establish the link to the tweet
 exports.tweet = {
 
   handler: function (request, reply) {
-    let data = request.payload;
-    const tweet = new Tweet(data);
-    tweet.save().then(newTweet => {
+    const userEmail = request.auth.credentials.loggedInUser;
+    User.findOne({ email: userEmail }).then(user => {
+      let data = request.payload;
+      const tweet = new Tweet(data);
+      tweet.tweeter = user._id;
+      return tweet.save();
+    }).then(newTweet => {
       reply.redirect('/timeline');
     }).catch(err => {
       reply.redirect('/');
@@ -44,6 +49,7 @@ exports.tweet = {
   },
 
 };
+
 
 
 

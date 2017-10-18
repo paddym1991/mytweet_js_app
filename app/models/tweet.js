@@ -6,7 +6,11 @@ const mongoose = require('mongoose');
 
 const tweetSchema = mongoose.Schema({
   tweetText: String,
-  method: String,
+  date: Date,
+  tweeter: {    //To retrieve further information on the donor use an object reference directly to the User object
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
 });
 
 const Tweet = mongoose.model('Tweet', tweetSchema);
