@@ -39,6 +39,7 @@ exports.tweet = {
     User.findOne({ email: userEmail }).then(user => {
       let data = request.payload;
       const tweet = new Tweet(data);
+      tweet.date = new Date();
       tweet.tweeter = user._id;
       return tweet.save();
     }).then(newTweet => {
