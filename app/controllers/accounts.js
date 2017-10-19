@@ -79,8 +79,31 @@ exports.login = {
 
 //updated to consult the database when validating a user
 exports.authenticate = {
-
   auth: false,
+
+  validate: {
+
+    //This defines a schema which defines rules that our fields must adhere to
+    payload: {
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
+    },
+
+    //This is the handler to invoke if one or more of the fields fails the validation
+    failAction: function (request, reply, source, error) {
+      reply.view('login', {
+        title: 'Login error',
+        errors: error.data.details,
+      }).code(400);
+    },
+
+    //have the component report all errors and not just one
+    options: {
+      abortEarly: false,
+    },
+
+  },
+
   handler: function (request, reply) {
     const user = request.payload;
     User.findOne({ email: user.email }).then(foundUser => {
@@ -98,6 +121,7 @@ exports.authenticate = {
     }).catch(err => {
       reply.redirect('/');
     });
+
   },
 
 };
