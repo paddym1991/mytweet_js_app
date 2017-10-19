@@ -21,12 +21,8 @@
     "hapi": "^16.6.2",    //installed HAPI plugin 'npm install hapi -save'
     "hapi-auth-cookie": "^7.0.0",   //installed cookie plugin 'npm install hapi-auth-cookie -save'
     "inert": "^4.2.1",    //intalled inert plugin 'npm install inert -save'
+    "joi": "^13.0.1",   //installed joi plugin 'npm install joi -save'
     "mongoose": "^4.12.3",    //installed mongoose framework 'npm install mongoose -save'
-    "vision": "^4.1.1"    //installed vision plugin 'npm install viaion -save'
+    "vision": "^4.1.1"    //installed vision plugin 'npm install vision -save'
   }
 }
-
-
-
-
-
