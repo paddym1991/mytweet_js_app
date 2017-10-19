@@ -4,7 +4,7 @@
   "description": "a microblog/twitter like application",
   "main": "index.js",
   "scripts": {
-    "start": "node index",    //node launch script
+    "start": "node index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,12 +18,12 @@
   },
   "homepage": "https://github.com/paddym1991/mytweet_js_app#readme",
   "dependencies": {
-    "handlebars": "^4.0.10",    //installed handlebars engine 'npm install handlebars -save'
-    "hapi": "^16.6.2",    //installed HAPI plugin 'npm install hapi -save'
-    "hapi-auth-cookie": "^7.0.0",   //installed cookie plugin 'npm install hapi-auth-cookie -save'
-    "inert": "^4.2.1",    //intalled inert plugin 'npm install inert -save'
-    "joi": "^13.0.1",   //installed joi plugin 'npm install joi -save'
-    "mongoose": "^4.12.3",    //installed mongoose framework 'npm install mongoose -save'
-    "vision": "^4.1.1"    //installed vision plugin 'npm install vision -save'
+    "handlebars": "^4.0.10",
+    "hapi": "^16.6.2",
+    "hapi-auth-cookie": "^7.0.0",
+    "inert": "^4.2.1",
+    "joi": "^13.0.1",
+    "mongoose": "^4.12.3",
+    "vision": "^4.1.1"
   }
 }
