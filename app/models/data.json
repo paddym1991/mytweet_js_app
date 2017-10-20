@@ -1,0 +1,19 @@
+{
+  "users": {
+    "_model": "User",
+    "homer": {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret"
+    }
+  },
+  "tweets": {
+    "_model": "Tweet",
+    "one": {
+      "tweetText": "This is a good tweet. If I do say so myself.",
+      "date": "2017-10-19T20:19:31.925Z",
+      "tweeter": "->users.homer"     
+    }
+  }
+}
