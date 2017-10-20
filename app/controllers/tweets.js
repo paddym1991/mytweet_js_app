@@ -23,6 +23,8 @@ exports.timeline = {
         title: 'Tweets to date',
         tweets: allTweets,
       });
+      console.log('All Tweets');
+      console.log(allTweets);   //lags all tweets to console
     }).catch(err => {
       reply.redirect('/');
     });
@@ -43,6 +45,8 @@ exports.tweet = {
       tweet.tweeter = user._id;
       return tweet.save();
     }).then(newTweet => {
+      console.log('New Tweet');
+      console.log(newTweet);    //logs the new tweet to console.
       reply.redirect('/timeline');
     }).catch(err => {
       reply.redirect('/');
