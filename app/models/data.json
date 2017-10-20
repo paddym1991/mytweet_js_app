@@ -6,6 +6,18 @@
       "lastName": "Simpson",
       "email": "homer@simpson.com",
       "password": "secret"
+    },
+    "marge": {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret"
+    },
+    "bart": {
+      "firstName": "Bart",
+      "lastName": "Simpson",
+      "email": "bart@simpson.com",
+      "password": "secret"
     }
   },
   "tweets": {
@@ -13,7 +25,17 @@
     "one": {
       "tweetText": "This is a good tweet. If I do say so myself.",
       "date": "2017-10-19T20:19:31.925Z",
-      "tweeter": "->users.homer"     
+      "tweeter": "->users.homer"
+    },
+    "two": {
+      "tweetText": "So what's the story with that guy Donald Trump?",
+      "date": "2017-10-20T19:51:30.774Z",
+      "tweeter": "->users.marge"
+    },
+    "three": {
+      "tweetText": "Turnips???!!",
+      "date": "2017-10-20T20:05:44.883Z",
+      "tweeter": "->users.homer"
     }
   }
 }
