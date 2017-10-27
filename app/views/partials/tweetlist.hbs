@@ -4,12 +4,14 @@
       <img src="images/twitterBird1.jpg" class="ui medium image">
     </aside>
     <article class="eight wide column">
+      <form class="ui form"  action="/deletetweet" method="POST">
       <table class="ui celled table segment">
         <thead>
         <tr>
           <th>Tweet</th>
           <th>Date</th>
           <th>Posted By</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -18,10 +20,44 @@
             <td> {{tweetText}} </td>
             <td> {{date}} </td>
             <td> {{tweeter.firstName}} {{tweeter.lastName}} </td>
+            <td>
+                <div class="ui checkbox">
+                  <input name="{{_id}}" type="checkbox">
+                  <label>Delete</label>
+                </div>
+            </td>
           </tr>
         {{/each}}
         </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>
+              <button  class="ui red submit icon button"> Delete Selected
+              </button>
+            </th>
+          </tr>
+        </tfoot>
       </table>
+      </form>
     </article>
   </div>
 </section>
+
+
+<script>
+  $('.ui.checkbox')
+      .checkbox()
+  ;
+
+  // Listen for click on toggle checkbox
+  $('#selectAll').click(function(event) {
+    if(this.checked) {
+      $(':checkbox').each(function() {
+        this.checked = true;
+      });
+    }
+  });
+</script>

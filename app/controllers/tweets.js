@@ -24,7 +24,7 @@ exports.timeline = {
         tweets: allTweets,
       });
       console.log('All Tweets');
-      console.log(allTweets);   //lags all tweets to console
+      console.log(allTweets);   //logs all tweets to console
     }).catch(err => {
       reply.redirect('/');
     });
