@@ -7,6 +7,7 @@ module.exports = [
   { method: 'GET', path: '/home', config: Tweets.home },
   { method: 'GET', path: '/timeline', config: Tweets.timeline },
   { method: 'POST', path: '/tweet', config: Tweets.tweet },    //POST route to accept tweets
+  { method: 'POST', path: '/deletetweet', config: Tweets.deletetweet },
 
     //to serve all files in the assets folder
   {

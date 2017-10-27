@@ -55,6 +55,25 @@ exports.tweet = {
 
 };
 
+/**
+ * Handler to delete tweet/tweets by id
+ * @type {{handler: exports.deletetweet.handler}}
+ */
+exports.deletetweet = {
+  handler: function (request, reply) {
+    const tweets = Object.keys(request.payload);
+    tweets.forEach(function (id) {
+      Tweet.findByIdAndRemove(id, function (err) {
+        if (err) throw err;
+        console.log('Deleted id: ' + id);
+      });
+    });
+
+    reply.redirect('/timeline');
+
+  },
+};
+
 
 
 
