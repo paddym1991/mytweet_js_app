@@ -18,6 +18,12 @@
       "lastName": "Simpson",
       "email": "bart@simpson.com",
       "password": "secret"
+    },
+    "admin": {
+      "firstName": "Admin",
+      "lastName": "Istrator",
+      "email": "admin@istrator.com",
+      "password": "secret"
     }
   },
   "tweets": {

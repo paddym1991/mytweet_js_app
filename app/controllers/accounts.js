@@ -106,22 +106,32 @@ exports.authenticate = {
 
   handler: function (request, reply) {
     const user = request.payload;
-    User.findOne({ email: user.email }).then(foundUser => {
-      if (foundUser && foundUser.password === user.password) {
-        request.cookieAuth.set({    //setting a session cookie after user credentials are verified
-          loggedIn: true,
-          loggedInUser: user.email,
-        });
-        console.log('this is authenticating');
-        console.log(foundUser);
-        reply.redirect('/home');
-      } else {
-        reply.redirect('/signup');
-      }
-    }).catch(err => {
-      reply.redirect('/');
-    });
 
+    //if login details match that of admin user, redirect to admin page
+    if ((user.email === 'admin@istrator.com') && (user.password === 'secret')) {
+      request.cookieAuth.set({
+        loggedIn: true,
+        LoggedInUser: user.email,
+      });
+      console.log('Admin authenticating');
+      reply.redirect('/admindash');
+    } else {
+      User.findOne({ email: user.email }).then(foundUser => {
+        if (foundUser && foundUser.password === user.password) {
+          request.cookieAuth.set({    //setting a session cookie after user credentials are verified
+            loggedIn: true,
+            loggedInUser: user.email,
+          });
+          console.log('this is authenticating');
+          console.log(foundUser);
+          reply.redirect('/home');
+        } else {
+          reply.redirect('/signup');
+        }
+      }).catch(err => {
+        reply.redirect('/');
+      });
+    }
   },
 
 };
