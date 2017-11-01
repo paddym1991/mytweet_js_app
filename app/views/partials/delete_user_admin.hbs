@@ -1,0 +1,17 @@
+<div class="ui row segment">
+
+    <div class="ui sixteen wide column">
+      <div class="ui row segment">
+        <h3>Delete User(s)</h3>
+        <form action="/admindash/adminDeleteUser" method="POST">
+          <select name="users" multiple="" class="ui fluid dropdown">
+            {{#each users}}
+              <option value="{{_id}}">{{firstName}} {{lastName}}</option>
+            {{/each}}
+          </select><br>
+          <button class="ui blue submit button">Delete</button>
+        </form>
+      </div>
+    </div>
+
+</div>

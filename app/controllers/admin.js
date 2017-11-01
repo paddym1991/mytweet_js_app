@@ -63,3 +63,41 @@ exports.adminRegister = {
   },
 
 };
+
+exports.adminDeleteUser = {
+  handler: function (request, reply) {
+    const data = request.payload.users;
+    let users = [];
+    if (request.payload.users.constructor !== Array) {
+      users.push(data);
+    } else {
+      users = data;
+    }
+
+    Tweet.find({ user: users }).then(foundTweets => {
+      // delete tweets individually
+      foundTweets.forEach(function (id) {
+        Tweet.findByIdAndRemove(id, function (err) {
+          if (err) throw err;
+        });
+      });
+
+      return null;
+    }).then(nothing => {
+      // delete user(s)
+      console.log(users);
+      users.forEach(function (userId) {
+        User.findByIdAndRemove(userId, function (err) {
+          if (err) throw err;
+        });
+
+        return null;
+      });
+    }).then(nothing => {
+      reply.redirect('/admindash', {
+        title: 'Deleted User(s)',
+      });
+    });
+  },
+
+};
