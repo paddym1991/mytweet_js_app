@@ -9,7 +9,7 @@ exports.main = {
     User.find({}).then(allUsers => {
       Tweet.find({}).populate('user').then(allTweets => {
         reply.view('admindash', {
-          title: 'Admin settings',
+          title: 'Admin Dashboard',
           users: allUsers,
           tweets: allTweets,
         });
