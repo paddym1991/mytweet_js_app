@@ -114,6 +114,7 @@ exports.authenticate = {
         LoggedInUser: user.email,
       });
       console.log('Admin authenticating');
+      console.log(user);
       reply.redirect('/admindash');
     } else {
       User.findOne({ email: user.email }).then(foundUser => {

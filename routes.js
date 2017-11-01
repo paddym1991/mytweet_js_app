@@ -28,5 +28,6 @@ module.exports = [
   { method: 'POST', path: '/settings', config: Accounts.updateSettings },
 
   { method: 'GET', path: '/admindash', config: Admin.main },
+  { method: 'POST', path: '/admindash/adminRegister', config: Admin.adminRegister },
 
 ];
