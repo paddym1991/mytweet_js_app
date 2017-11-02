@@ -11,6 +11,7 @@ module.exports = [
   { method: 'POST', path: '/deletetweet', config: Tweets.deletetweet },
   { method: 'GET', path: '/searchuser', config: Tweets.searcheduser },
   { method: 'POST', path: '/searcheduser', config: Tweets.searchusertweets },
+  { method: 'GET', path: '/loggedinusertimeline', config: Tweets.loggedInUserTimeline },
 
     //to serve all files in the assets folder
   {

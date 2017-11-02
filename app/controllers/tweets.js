@@ -106,7 +106,10 @@ exports.searcheduser = {
 
 };
 
-//find all tweets by users email address
+/**
+ * find all tweets by users email address. Send user to the searched users timeline
+ * @type {{handler: exports.searchusertweets.handler}}
+ */
 exports.searchusertweets = {
 
   handler: function (request, reply) {
@@ -139,6 +142,29 @@ exports.searchusertweets = {
   },
 };
 
+/**
+ * handler to direct user to their own timeline with a list of their tweets.
+ * @type {{handler: exports.loggedInUserTimeline.handler}}
+ */
+exports.loggedInUserTimeline = {
 
+  handler: function (request, reply) {
+    let loggedInUserEmail = request.auth.credentials.loggedInUser;
+    let user = User.findOne({email: loggedInUserEmail});
+    User.findOne({ email: loggedInUserEmail }).then(foundUser => {
+      Tweet.find({tweeter: foundUser._id}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
+        reply.view('loggedinusertimeline', {
+          title: 'My Tweets to Date',
+          tweets: allTweets,
+        });
+        console.log('All My Tweets');
+        console.log(allTweets);
+      })
+    }).catch(err => {
+      console.log(err);
+      reply.redirect('/');
+    });
+  },
+};
 
 
