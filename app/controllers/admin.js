@@ -64,6 +64,10 @@ exports.adminRegister = {
 
 };
 
+/**
+ * Handler for admin to delete a user from db
+ * @type {{handler: exports.adminDeleteUser.handler}}
+ */
 exports.adminDeleteUser = {
   handler: function (request, reply) {
     const data = request.payload.users;

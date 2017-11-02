@@ -98,6 +98,10 @@ exports.deletetweet = {
   },
 };
 
+/**
+ * Directs user to searched users page
+ * @type {{handler: exports.searcheduser.handler}}
+ */
 exports.searcheduser = {
 
   handler: function (request, reply) {

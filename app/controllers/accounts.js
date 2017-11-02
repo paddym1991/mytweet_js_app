@@ -68,6 +68,10 @@ exports.register = {
 
 };
 
+/**
+ * direct user to the login page
+ * @type {{auth: boolean, handler: exports.login.handler}}
+ */
 exports.login = {
 
   auth: false,
@@ -137,6 +141,10 @@ exports.authenticate = {
 
 };
 
+/**
+ * Clear the cookie and redirect user to main page when logout chosen
+ * @type {{auth: boolean, handler: exports.logout.handler}}
+ */
 exports.logout = {
 
   auth: false,
@@ -216,7 +224,7 @@ exports.updateSettings = {
       console.log(user.firstName + "'s account edited");
       console.log(user);
       reply.view('settings', { title: 'Edit Account Settings', user: user });
-      });
+    });
   },
 
 };
