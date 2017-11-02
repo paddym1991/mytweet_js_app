@@ -5,6 +5,7 @@
 //tweet controller can now require the tweet model
 const Tweet = require('../models/tweet');
 const User = require('../models/user');   //To gain access to the object reference (user)
+const Joi = require('joi');
 
 exports.home = {
 
@@ -35,6 +36,29 @@ exports.timeline = {
 
 //Reimplement the tweet handler to establish the link to the tweet
 exports.tweet = {
+  auth: false,
+
+  validate: {
+
+    //This defines a schema which defines rules that our fields must adhere to
+    payload: {
+      tweetText: Joi.string().required(),
+    },
+
+    //This is the handler to invoke if one or more of the fields fails the validation
+    failAction: function (request, reply, source, error) {
+      reply.view('home', {
+        title: 'Tweet error',
+        errors: error.data.details,
+      }).code(400);
+    },
+
+    //have the component report all errors and not just one
+    options: {
+      abortEarly: false,
+    },
+
+  },
 
   handler: function (request, reply) {
     const userEmail = request.auth.credentials.loggedInUser;
