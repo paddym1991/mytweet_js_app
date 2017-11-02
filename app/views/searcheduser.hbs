@@ -1,0 +1,29 @@
+{{> mainmenu _id="searcheduser"}}
+
+<section class="ui raised segment">
+  <div class="ui grid">
+    <aside class="six wide column">
+      <img src="images/twitterBird1.jpg" class="ui small image">
+    </aside>
+    <article class="ten wide column">
+      <table class="ui fixed celled table segment">
+        <thead>
+        <tr>
+          <th>Tweet</th>
+          <th>Date</th>
+          <th>Posted By</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each tweets}}
+          <tr>
+            <td> {{tweetText}} </td>
+            <td> {{date}} </td>
+            <td> {{tweeter.firstName}} {{tweeter.lastName}} </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </article>
+  </div>
+</section>

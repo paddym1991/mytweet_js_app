@@ -36,7 +36,6 @@ exports.timeline = {
 
 //Reimplement the tweet handler to establish the link to the tweet
 exports.tweet = {
-  auth: false,
 
   validate: {
 
@@ -62,6 +61,7 @@ exports.tweet = {
 
   handler: function (request, reply) {
     const userEmail = request.auth.credentials.loggedInUser;
+    console.log(userEmail);
     User.findOne({ email: userEmail }).then(user => {
       let data = request.payload;
       const tweet = new Tweet(data);
@@ -95,6 +95,47 @@ exports.deletetweet = {
 
     reply.redirect('/timeline');
 
+  },
+};
+
+exports.searcheduser = {
+
+  handler: function (request, reply) {
+    reply.view('searcheduser', { title: 'Search for user Tweets' });
+  },
+
+};
+
+//find all tweets by users email address
+exports.searchusertweets = {
+
+  handler: function (request, reply) {
+    let findUserEmail = request.payload.useremail;
+    console.log(findUserEmail);
+    let user = User.findOne({email: findUserEmail});
+    console.log(user);
+    // Tweet.find({tweeter: user}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {    //minor update to the timeline handler - with a populate('tweeter') call inserted into the query
+    //   reply.view('searchuser', {
+    //     title: 'Tweets to date',
+    //     tweets: allTweets,
+    //   });
+    //   console.log('All Tweets');
+    //   console.log(allTweets);   //logs all tweets to console
+    // }).catch(err => {
+    //   reply.redirect('/');
+    // });
+    User.findOne({ email: findUserEmail }).then(foundUser => {
+      Tweet.find({tweeter: foundUser._id}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
+        reply.view('searcheduser', {
+          title: 'Tweets to date',
+          tweets: allTweets,
+        });
+        console.log('All Tweets');
+        console.log(allTweets);   //logs all tweets to console
+      })
+    }).catch(err => {
+      reply.redirect('/');
+    });
   },
 };
 

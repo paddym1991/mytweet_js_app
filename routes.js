@@ -9,6 +9,8 @@ module.exports = [
   { method: 'GET', path: '/timeline', config: Tweets.timeline },
   { method: 'POST', path: '/tweet', config: Tweets.tweet },    //POST route to accept tweets
   { method: 'POST', path: '/deletetweet', config: Tweets.deletetweet },
+  { method: 'GET', path: '/searchuser', config: Tweets.searcheduser },
+  { method: 'POST', path: '/searcheduser', config: Tweets.searchusertweets },
 
     //to serve all files in the assets folder
   {
