@@ -131,6 +131,7 @@ exports.searchusertweets = {
       Tweet.find({tweeter: foundUser._id}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
         reply.view('searcheduser', {
           title: 'Tweets to date',
+          user: foundUser,
           tweets: allTweets,
         });
         console.log('All Tweets');
@@ -155,6 +156,7 @@ exports.loggedInUserTimeline = {
       Tweet.find({tweeter: foundUser._id}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
         reply.view('loggedinusertimeline', {
           title: 'My Tweets to Date',
+          user: foundUser,
           tweets: allTweets,
         });
         console.log('All My Tweets');
