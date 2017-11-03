@@ -7,7 +7,7 @@ const Joi = require('joi');
 exports.main = {
   handler: function (request, reply) {
     User.find({}).then(allUsers => {
-      Tweet.find({}).populate('user').then(allTweets => {
+      Tweet.find({}).populate('user').populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
         reply.view('admindash', {
           title: 'Admin Dashboard',
           users: allUsers,
