@@ -19,16 +19,35 @@ exports.home = {
 exports.timeline = {
 
   handler: function (request, reply) {
+
+    let loggedInUserEmail = request.auth.credentials.loggedInUser;
+
+    //find all tweets
     Tweet.find({}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {    //minor update to the timeline handler - with a populate('tweeter') call inserted into the query
-      reply.view('timeline', {
-        title: 'Tweets to date',
-        tweets: allTweets,
-      });
-      console.log('All Tweets');
-      console.log(allTweets);   //logs all tweets to console
+      //find logged in user
+      User.findOne({ email: loggedInUserEmail }).then(foundUser => {
+        console.log(loggedInUserEmail);
+        //if logged in user is admin then display admin timeline view
+        if (foundUser.email === 'admin@istrator.com') {
+          reply.view('global_timeline_admin', {
+            title: 'Tweets to date',
+            tweets: allTweets,
+          });
+          //if logged in user is normal user then display timeline view
+        } else {
+          reply.view('timeline', {
+            title: 'Tweets to date',
+            tweets: allTweets,
+          });
+          //logs all tweets to console
+          console.log('All Tweets');
+          console.log(allTweets);
+        }
     }).catch(err => {
       reply.redirect('/');
     });
+  })
+
   },
 
 };
