@@ -46,7 +46,7 @@ exports.timeline = {
     }).catch(err => {
       reply.redirect('/');
     });
-  })
+  });
 
   },
 
@@ -118,11 +118,11 @@ exports.deletetweet = {
     //page is redirected based on who is logged in
     User.findOne({ email: loggedInUserEmail }).then(foundUser => {
       console.log(loggedInUserEmail);
-      if (foundUser.email === 'admin@istrator.com') {
-        reply.redirect('/admindash');
-      } else {
+      // if (foundUser.email === 'admin@istrator.com') {
+      //   reply.redirect('/timeline');
+      // } else {
         reply.redirect('/timeline');
-      }
+      //}
     })
 
   },
