@@ -147,35 +147,46 @@ exports.searcheduser = {
 exports.searchusertweets = {
 
   handler: function (request, reply) {
+    //get user email of searched user email
     let findUserEmail = request.payload.useremail;
     console.log(findUserEmail);
+    //find user from email searched
     let user = User.findOne({email: findUserEmail});
     console.log(user);
-    // Tweet.find({tweeter: user}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {    //minor update to the timeline handler - with a populate('tweeter') call inserted into the query
-    //   reply.view('searchuser', {
-    //     title: 'Tweets to date',
-    //     tweets: allTweets,
-    //   });
-    //   console.log('All Tweets');
-    //   console.log(allTweets);   //logs all tweets to console
-    // }).catch(err => {
-    //   reply.redirect('/');
-    // });
+    //get logged in user
+    let loggedInUserEmail = request.auth.credentials.loggedInUser;
+
+    //get found user from db
     User.findOne({ email: findUserEmail }).then(foundUser => {
+      //get all tweets from found user
       Tweet.find({tweeter: foundUser._id}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
-        reply.view('searcheduser', {
-          title: 'Tweets to date',
-          user: foundUser,
-          tweets: allTweets,
-        });
-        console.log('All Tweets');
-        console.log(allTweets);   //logs all tweets to console
-      })
-    }).catch(err => {
-      reply.redirect('/');
-    });
+        //find logged in user (user that is searching)
+        User.findOne({ email: loggedInUserEmail }).then(loggedInUser => {
+          //if logged in user is admin then display admin searched user view
+          if (loggedInUser.email === 'admin@istrator.com') {
+            reply.view('searcheduseradmin', {
+              title: 'Tweets to date',
+              user: foundUser,
+              tweets: allTweets,
+            });
+            //if logged in user is normal user then display searched user view
+          } else {
+            reply.view('searcheduser', {
+              title: 'Tweets to date',
+              user: foundUser,
+              tweets: allTweets,
+            });
+          }
+          console.log('All Tweets');
+          console.log(allTweets);   //logs all tweets to console
+        })
+      }).catch(err => {
+        reply.redirect('/');
+      });
+    })
   },
 };
+
 
 /**
  * handler to direct user to their own timeline with a list of their tweets.
