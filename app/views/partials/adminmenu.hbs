@@ -8,3 +8,9 @@
     <a id="logout" class= "item" href="/logout"> Logout</a>
   </div>
 </nav>
+
+<!--active item passed as a parameter to the partial.
+   active item set based on the parameter-->
+<script>
+  $("#{{_id}}").addClass("active item");      //set the active class for the menu item with the id '_id'
+</script>
