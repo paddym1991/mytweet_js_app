@@ -85,6 +85,10 @@ exports.tweet = {
  */
 exports.deletetweet = {
   handler: function (request, reply) {
+
+    let loggedInUserEmail = request.auth.credentials.loggedInUser;
+    console.log(loggedInUserEmail);
+
     const tweets = Object.keys(request.payload);
     tweets.forEach(function (id) {
       Tweet.findByIdAndRemove(id, function (err) {
@@ -92,8 +96,15 @@ exports.deletetweet = {
         console.log('Deleted id: ' + id);
       });
     });
-
-    reply.redirect('/timeline');
+    //page is redirected based on who is logged in
+    User.findOne({ email: loggedInUserEmail }).then(foundUser => {
+      console.log(loggedInUserEmail);
+      if (foundUser.email === 'admin@istrator.com') {
+        reply.redirect('/admindash');
+      } else {
+        reply.redirect('/timeline');
+      }
+    })
 
   },
 };

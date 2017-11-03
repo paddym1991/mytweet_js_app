@@ -109,34 +109,37 @@ exports.authenticate = {
   },
 
   handler: function (request, reply) {
+    //login details passed in to form
     const user = request.payload;
 
-    //if login details match that of admin user, redirect to admin page
-    if ((user.email === 'admin@istrator.com') && (user.password === 'secret')) {
-      request.cookieAuth.set({
-        loggedIn: true,
-        LoggedInUser: user.email,
-      });
-      console.log('Admin authenticating');
-      console.log(user);
-      reply.redirect('/admindash');
-    } else {
-      User.findOne({ email: user.email }).then(foundUser => {
-        if (foundUser && foundUser.password === user.password) {
-          request.cookieAuth.set({    //setting a session cookie after user credentials are verified
-            loggedIn: true,
-            loggedInUser: user.email,
-          });
-          console.log('this is authenticating');
-          console.log(foundUser);
-          reply.redirect('/home');
-        } else {
-          reply.redirect('/signup');
-        }
-      }).catch(err => {
-        reply.redirect('/');
-      });
-    }
+    //check if any users in db match the email passed in. If so they become the foundUser
+    User.findOne({ email: user.email }).then(foundUser => {
+      //if the found user's details match the admin account then log in as admin
+      if ((user.email === 'admin@istrator.com') && (user.password === 'secret')) {
+        request.cookieAuth.set({
+          loggedIn: true,
+          loggedInUser: user.email,
+        });
+        console.log('Admin authenticating');
+        console.log(foundUser);
+        reply.redirect('/admindash');
+
+        //if found user's details match any other user then log them in as a normal user
+      }else if (foundUser && foundUser.password === user.password) {
+        request.cookieAuth.set({    //setting a session cookie after user credentials are verified
+          loggedIn: true,
+          loggedInUser: user.email,
+        });
+        console.log('User is authenticating');
+        console.log(foundUser);
+        reply.redirect('/home');
+      } else {
+        reply.redirect('/signup');
+      }
+    }).catch(err => {
+      reply.redirect('/');
+    });
+
   },
 
 };
