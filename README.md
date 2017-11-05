@@ -17,7 +17,7 @@ also register new users.
 
 **Deployed Heroku URL:** https://vast-mountain-21779.herokuapp.com/
 
-#### Login Details:
+## Login Details:
 
 The application has been seeded with the following content
 
@@ -32,7 +32,7 @@ The application has been seeded with the following content
     
     1. admin@istrator.com   password: secret
 
-#### Features:
+## Features:
 
 ```
 • Enable user signup / registration / login
