@@ -35,5 +35,4 @@ module.exports = [
   { method: 'POST', path: '/adminRegister', config: Admin.adminRegister },
   { method: 'POST', path: '/admindash/adminDeleteUser', config: Admin.adminDeleteUser },
 
-
 ];

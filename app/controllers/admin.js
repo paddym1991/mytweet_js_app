@@ -78,15 +78,85 @@ exports.adminRegister = {
  */
 exports.adminDeleteUser = {
   handler: function (request, reply) {
-    const userId = request.payload.users;
-    Tweet.remove({ user: userId }).then(removeTweetSuccess => {
-      console.log('User Tweets removed:', userId);
-      return User.findByIdAndRemove({ _id: userId });
-    }).then(removeUserSuccess => {
-      console.log('User removed:', userId);
-      reply.redirect('/admindash');
-    }).catch(err => {
-      reply.redirect('/admindash');
+    const data = request.payload.users;
+    let users = [];
+    if (request.payload.users.constructor !== Array) {
+      users.push(data);
+    } else {
+      users = data;
+    }
+
+    Tweet.find({ user: users }).then(foundTweets => {
+      // delete tweets individually
+      foundTweets.forEach(function (id) {
+        Tweet.findByIdAndRemove(id, function (err) {
+          if (err) throw err;
+        });
+      });
+
+      return null;
+    }).then(nothing => {
+      // delete user(s)
+      console.log(users);
+      users.forEach(function (userId) {
+        User.findByIdAndRemove(userId, function (err) {
+          if (err) throw err;
+        });
+
+        return null;
+      });
+    }).then(nothing => {
+      reply.redirect('/admindash', {
+        title: 'Deleted User(s)',
+      });
     });
   },
+
 };
+
+// /**
+//  * Handler for admin to delete a user from db
+//  * @type {{handler: exports.adminDeleteUser.handler}}
+//  */
+// exports.adminDeleteUser = {
+//   handler: function (request, reply) {
+//     const userEmail = request.payload;
+//     console.log(userEmail);
+//     User.find({ user: userEmail }).then(foundUser => {
+//       Tweet.remove({ user: foundUser }).then(deletedTweets => {
+//         console.log(foundUser.firstName + "'s Tweets Deleted");
+//       });
+//     }).then(result => {
+//       reply.redirect('/admindash');
+//     }).catch(err => {
+//       console.log('Error deleting user: ' + err);
+//       reply.redirect('/admindash');
+//     });
+//   },
+// };
+
+//     Tweet.remove({ user: userId }).then(removeTweetSuccess => {
+//       console.log('User Tweets removed:', userId);
+//       return User.findByIdAndRemove({ _id: userId });
+//     }).then(removeUserSuccess => {
+//       console.log('User removed:', userId);
+//       reply.redirect('/admindash');
+//     }).catch(err => {
+//       reply.redirect('/admindash');
+//     });
+//   },
+// };
+//
+// exports.deleteOne = {
+//
+//   auth: false,
+//
+//   handler: function (request, reply) {
+//     User.remove({ _id: request.params.id }).then(user => {
+//       reply(user).code(204);
+//     }).catch(err => {
+//       reply(Boom.notFound('id not found'));
+//     });
+//   },
+//
+// };
