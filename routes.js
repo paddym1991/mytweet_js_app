@@ -31,7 +31,9 @@ module.exports = [
   { method: 'POST', path: '/settings', config: Accounts.updateSettings },
 
   { method: 'GET', path: '/admindash', config: Admin.main },
-  { method: 'POST', path: '/admindash/adminRegister', config: Admin.adminRegister },
+  { method: 'GET', path: '/registeruseradmin', config: Admin.registeruseradmin },
+  { method: 'POST', path: '/adminRegister', config: Admin.adminRegister },
   { method: 'POST', path: '/admindash/adminDeleteUser', config: Admin.adminDeleteUser },
+
 
 ];
