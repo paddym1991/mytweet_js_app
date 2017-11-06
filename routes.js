@@ -33,6 +33,6 @@ module.exports = [
   { method: 'GET', path: '/admindash', config: Admin.main },
   { method: 'GET', path: '/registeruseradmin', config: Admin.registeruseradmin },
   { method: 'POST', path: '/adminRegister', config: Admin.adminRegister },
-  { method: 'POST', path: '/admindash/adminDeleteUser', config: Admin.adminDeleteUser },
+  { method: 'GET', path: '/adminDeleteUser/{_id}', config: Admin.adminDeleteUser },
 
 ];

@@ -1,17 +1,57 @@
-<div class="ui row segment">
 
-    <div class="ui sixteen wide column">
-      <div class="ui row segment">
-        <h3>Delete User(s)</h3>
-        <form action="/admindash/adminDeleteUser" method="POST">
-          <select name="users" multiple="" class="ui fluid dropdown">
-            {{#each users}}
-              <option value="{{_id}}">{{firstName}} {{lastName}}</option>
-            {{/each}}
-          </select><br>
-          <button class="ui blue submit button">Delete</button>
-        </form>
-      </div>
+<section class="ui blue center aligned segment">
+
+  <div class="ui accordion">
+    <div class="title">
+      <h3>
+        Delete Users
+      </h3>
+      <i class="dropdown icon"></i>
     </div>
+    <div class="content">
+<table class="ui celled table">
+  <thead>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  {{#each users}}
+    <tr>
+      <td>
+        {{firstName}}
+      </td>
+      <td>
+        {{lastName}}
+      </td>
+      <td>
+        {{email}}
+      </td>
+      <td>
+        <a href="/adminDeleteUser/{{_id}}" class="ui red icon button">
+          <i class="icon trash"></i>
+        </a>
+      </td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+    </div>
+  </div>
 
-</div>
+</section>
+
+
+<script>
+  // for dropdown feature
+  $('.ui .accordion')
+      .accordion({
+        selector: {
+          trigger: '.title .icon'
+        }
+      })
+  ;
+</script>
