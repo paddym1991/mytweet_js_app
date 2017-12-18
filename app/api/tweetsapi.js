@@ -23,7 +23,7 @@ exports.findOne = {
 exports.findAll = {
   auth: false,
   handler: function (req, res) {
-    Tweet.find({}).exec().then(tweets => {
+    Tweet.find({}).exec().populate('tweeter').then(tweets => {
       res(tweets);
     }).catch(err => {
       res(Boom.badImplementation('Error accessing database: ' + err));
