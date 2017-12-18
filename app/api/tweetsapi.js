@@ -32,7 +32,7 @@ exports.findAll = {
 };
 
 //api method to create a new tweet
-exports.addNewTweet = {
+exports.createTweet = {
   auth: false,
   handler: function (req, res) {
     const tweet = new Tweet(req.payload);
