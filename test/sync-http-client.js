@@ -33,6 +33,11 @@ class SyncHttpService {
 
     return returnedObj;
   }
+
+  delete(url) {
+    let res = request('DELETE', this.baseUrl + url, { headers: this.authHeadder });
+    return res.statusCode;
+  }
 }
 
 module.exports = SyncHttpService;

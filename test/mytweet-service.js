@@ -26,6 +26,14 @@ class MyTweetService {
     return this.httpService.post('/api/users', newUser);
   }
 
+  deleteAllUsers() {
+    return this.httpService.delete('/api/users');
+  }
+
+  deleteOneUser(id) {
+    return this.httpService.delete('/api/users/' + id);
+  }
+
   getTweets() {
     return this.httpService.get('api/tweets');
   }
@@ -39,4 +47,4 @@ class MyTweetService {
   }
 }
 
-module.exports = TweetService;
+module.exports = MyTweetService;
