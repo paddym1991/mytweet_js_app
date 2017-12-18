@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 //let dbURI = 'mongodb://localhost/mytweet';    //for seeding locally
-let dbURI = 'mongodb://tweetuser:tweetuser@ds227035.mlab.com:27035/mytweet';    //for seeding heroku
+let dbURI = 'mongodb://tweetuser:tweetuser@ds227035.mlab.com:27035/mytweet';  //for seeding heroku
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
 }
