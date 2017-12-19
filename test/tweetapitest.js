@@ -1,4 +1,4 @@
-'use strict';
+á'use strict';
 
 const assert = require('chai').assert;
 const MyTweetService = require('./mytweet-service');
