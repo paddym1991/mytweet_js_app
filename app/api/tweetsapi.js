@@ -67,3 +67,17 @@ exports.deleteAllTweets = {
     });
   },
 };
+
+exports.deleteUserTweets = {
+
+  auth: false,
+
+  handler: function (request, reply) {
+    Tweet.remove({ user: request.params.id }).then(err => {
+      reply().code(204);
+    }).catch(err => {
+      reply(Boom.badImplementation('error removing Tweets'));
+    });
+  },
+
+};

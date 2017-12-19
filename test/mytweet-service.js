@@ -49,6 +49,10 @@ class MyTweetService {
   deleteAllTweets() {
     return this.httpService.delete('api/tweets');
   }
+
+  deleteUserTweets() {
+    return this.httpService.delete('api/users/' + id + '/tweets');
+  }
 }
 
 module.exports = MyTweetService;
