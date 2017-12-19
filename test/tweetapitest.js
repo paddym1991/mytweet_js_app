@@ -1,4 +1,4 @@
-á'use strict';
+'use strict';
 
 const assert = require('chai').assert;
 const MyTweetService = require('./mytweet-service');
@@ -7,7 +7,7 @@ const _ = require('lodash');
 
 suite('Tweet API tests', function () {
 
-  let tweets = fixtures.donations;
+  let tweets = fixtures.tweets;
 
   const myTweetService = new MyTweetService(fixtures.myTweetService);
 
