@@ -5,20 +5,14 @@ const Hapi = require('hapi');
 const server = new Hapi.Server();
 server.connection({ port: process.env.PORT || 4000 });
 
-/**
- * store a list of users and tweets in a simple array
- */
-/*server.bind({
-currentUser: {},   //will be using alternative mechanism to track the user
-users: {},    //changed users to store an object instead of array
-tweets: [],
-});*/
+//define a new strategy, which will be in addition to the strategy already in place
+const utils = require('./app/api/utils.js');
 
 //deleted existing server objects above and replaced with an import of the db just created
 require('./app/models/db');
 
 // initialising/registering inert, vision and cookie plugins
-server.register([require('inert'), require('vision'), require('hapi-auth-cookie')], err=> {
+server.register([require('inert'), require('vision'), require('hapi-auth-cookie'), require('hapi-auth-jwt2')], err=> {
 
   if (err) {
     throw err;
@@ -47,6 +41,16 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
     isSecure: false,
     ttl: 24 * 60 * 60 * 1000,
     redirectTo: '/login',     //if cookie expires or gets deleted redirect user to login page.
+  });
+
+  /**
+   * define a new strategy, which will be in addition to the strategy already in place.
+   * 'validateFunc' is specified here as part of the strategy
+   */
+  server.auth.strategy('jwt', 'jwt', {
+    key: 'secretpasswordnotrevealedtoanyone',
+    validateFunc: utils.validate,
+    verifyOptions: { algorithms: ['HS256'] },
   });
 
   //Cookie set as strategy for all routes.
