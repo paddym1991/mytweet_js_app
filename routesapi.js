@@ -21,4 +21,6 @@ module.exports = [
   { method: 'DELETE', path: '/api/tweets/{id}', config: TweetsApi.deleteOne },
   { method: 'DELETE', path: '/api/tweets', config: TweetsApi.deleteAllTweets },
   { method: 'DELETE', path: '/api/users/{id}/tweets', config: TweetsApi.deleteUserTweets },
+
+  { method: 'POST', path: '/api/users/authenticate', config: UsersApi.authenticate },
 ];

@@ -1,6 +1,6 @@
 {
-  "donationService": "https://vast-mountain-21779.herokuapp.com/",
-  "donationService": "http://LAPTOP-TASKL0QC:4000",
+  "myTweetService": "https://vast-mountain-21779.herokuapp.com/",
+  "myTweetService": "http://LAPTOP-TASKL0QC:4000",
   "users": {
     "_model": "User",
     "homer": {

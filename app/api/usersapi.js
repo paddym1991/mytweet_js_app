@@ -2,7 +2,7 @@
 
 const User = require('../models/user');
 const Boom = require('boom');
-const utils = require('/utils.js');
+const utils = require('./utils.js');
 
 //api to find all users
 exports.find = {

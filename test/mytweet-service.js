@@ -7,11 +7,16 @@
 
 const SyncHttpService = require('./sync-http-client');
 const baseUrl = 'http://localhost:4000';
+//const baseUrl = 'https://frozen-tor-98548.herokuapp.com';
 
 class MyTweetService {
 
   constructor(baseUrl) {
     this.httpService = new SyncHttpService(baseUrl);
+  }
+
+  authenticate(user) {
+    return this.httpService.post('/api/users/authenticate', user);
   }
 
   getUsers() {
