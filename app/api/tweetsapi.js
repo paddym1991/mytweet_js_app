@@ -20,10 +20,10 @@ exports.findOne = {
 };
 
 //api method to find all tweets
-exports.findAll = {
+exports.findAllTweets = {
   auth: false,
   handler: function (req, res) {
-    Tweet.find({}).exec().then(tweets => {
+    Tweet.find({}).exec().populate('tweeter').then(tweets => {
       res(tweets);
     }).catch(err => {
       res(Boom.badImplementation('Error accessing database: ' + err));
@@ -57,7 +57,7 @@ exports.deleteOne = {
 };
 
 //api method to delete all tweets
-exports.deleteAll = {
+exports.deleteAllTweets = {
   auth: false,
   handler: function (req, res) {
     Tweet.remove({}).then(err => {
@@ -66,4 +66,18 @@ exports.deleteAll = {
       res(Boom.badImplementation('Error deleting tweets: ' + err));
     });
   },
+};
+
+exports.deleteUserTweets = {
+
+  auth: false,
+
+  handler: function (request, reply) {
+    Tweet.remove({ user: request.params.id }).then(err => {
+      reply().code(204);
+    }).catch(err => {
+      reply(Boom.badImplementation('error removing Tweets'));
+    });
+  },
+
 };

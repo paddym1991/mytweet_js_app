@@ -45,6 +45,14 @@ class MyTweetService {
   createTweet(newTweet) {
     return this.httpService.post('/api/tweets', newTweet);
   }
+
+  deleteAllTweets() {
+    return this.httpService.delete('api/tweets');
+  }
+
+  deleteUserTweets() {
+    return this.httpService.delete('api/users/' + id + '/tweets');
+  }
 }
 
 module.exports = MyTweetService;
