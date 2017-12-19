@@ -13,11 +13,12 @@ module.exports = [
   { method: 'DELETE', path: '/api/users', config: UsersApi.deleteAll },   //route used to delete all users
 
     //find tweets
-  { method: 'GET', path: '/api/tweet', config: TweetsApi.findAllTweets },
-  { method: 'GET', path: '/api/tweet/{id}', config: TweetsApi.findOne },
+  { method: 'GET', path: '/api/tweets', config: TweetsApi.findAllTweets },
+  { method: 'GET', path: '/api/tweets/{id}', config: TweetsApi.findOne },
 
     //create/delete tweets
-  { method: 'POST', path: '/api/tweet', config: TweetsApi.createTweet },
-  { method: 'DELETE', path: '/api/tweet/{id}', config: TweetsApi.deleteOne },
-  { method: 'DELETE', path: '/api/tweet', config: TweetsApi.deleteAllTweets },
+  { method: 'POST', path: '/api/tweets', config: TweetsApi.createTweet },
+  { method: 'DELETE', path: '/api/tweets/{id}', config: TweetsApi.deleteOne },
+  { method: 'DELETE', path: '/api/tweets', config: TweetsApi.deleteAllTweets },
+  { method: 'DELETE', path: '/api/users/{id}/tweets', config: TweetsApi.deleteUserTweets },
 ];
