@@ -20,7 +20,7 @@ exports.findOne = {
 };
 
 //api method to find all tweets
-exports.findAll = {
+exports.findAllTweets = {
   auth: false,
   handler: function (req, res) {
     Tweet.find({}).exec().populate('tweeter').then(tweets => {
@@ -57,7 +57,7 @@ exports.deleteOne = {
 };
 
 //api method to delete all tweets
-exports.deleteAll = {
+exports.deleteAllTweets = {
   auth: false,
   handler: function (req, res) {
     Tweet.remove({}).then(err => {
