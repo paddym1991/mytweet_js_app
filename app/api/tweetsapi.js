@@ -37,7 +37,9 @@ exports.createTweet = {
   handler: function (req, res) {
     const tweet = new Tweet(req.payload);
     tweet.save().then(newTweet => {
-      res(newTweet).code(201);//201: HTTP code for resource created
+      Tweet.findOne(newTweet).populate('tweeter').then(tweet => {
+        res(tweet).code(201);
+      }); // res(newTweet).code(201);//201: HTTP code for resource created
     }).catch(err => {
       res(Boom.badImplementation('Error creating new tweet: ' + err));
     });

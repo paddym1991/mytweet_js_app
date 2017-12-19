@@ -1,5 +1,5 @@
 const UsersApi = require('./app/api/usersapi');
-const TweetsApi = require('/app/api/tweetsapi');
+const TweetsApi = require('./app/api/tweetsapi');
 
 module.exports = [
 
