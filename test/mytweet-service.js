@@ -46,7 +46,7 @@ class MyTweetService {
     return this.httpService.post('/api/tweets', newTweet);
   }
 
-  deleteAll() {
+  deleteAllTweets() {
     return this.httpService.delete('api/tweets');
   }
 }
