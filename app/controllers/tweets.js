@@ -61,6 +61,7 @@ exports.tweet = {
     //This defines a schema which defines rules that our fields must adhere to
     payload: {
       tweetText: Joi.string().required(),
+      picture: Joi,
     },
 
     //This is the handler to invoke if one or more of the fields fails the validation
@@ -79,6 +80,9 @@ exports.tweet = {
   },
 
   handler: function (request, reply) {
+    const data = request.payload;
+    console.log('picture from payload: ' + data.picture);
+
     const userEmail = request.auth.credentials.loggedInUser;
     console.log(userEmail);
     User.findOne({ email: userEmail }).then(user => {
@@ -86,6 +90,12 @@ exports.tweet = {
       const tweet = new Tweet(data);
       tweet.date = new Date();
       tweet.tweeter = user._id;
+
+      if (data.picture.length) {
+        tweet.picture.data = data.picture;
+      }
+      console.log('picture from payload: ' + data.picture);
+
       return tweet.save();
     }).then(newTweet => {
       console.log('New Tweet');
@@ -97,6 +107,22 @@ exports.tweet = {
   },
 
 };
+
+exports.getpicture = {
+  auth: false,
+
+  handler: function (request, reply) {
+    Tweet.findOne({ _id: request.params._id }).then(tweet => {
+      console.log('Found tweet for id: ' + request.params._id);
+      console.log('Pic : ' + tweet.picture);
+      reply(tweet.picture.data).type('image');
+    }).catch(err => {
+      console.log('Could not find tweet for tweet id: ' + request.params._id);
+    });
+
+  },
+};
+
 
 /**
  * Handler to delete tweet/tweets by id
