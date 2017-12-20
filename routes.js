@@ -14,6 +14,8 @@ module.exports = [
   { method: 'POST', path: '/searcheduser', config: Tweets.searchusertweets },
   { method: 'GET', path: '/loggedinusertimeline', config: Tweets.loggedInUserTimeline },
 
+  { method: 'GET', path: '/getpicture/{_id}', config: Tweets.getpicture },
+
     //to serve all files in the assets folder
   {
     method: 'GET',
