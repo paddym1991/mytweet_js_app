@@ -40,11 +40,11 @@ class MyTweetService {
   }
 
   getTweets() {
-    return this.httpService.get('api/tweets');
+    return this.httpService.get('/api/tweets');
   }
 
   getTweet(id) {
-    return this.httpService.get('api/tweets/' + id);
+    return this.httpService.get('/api/tweets/' + id);
   }
 
   createTweet(newTweet) {
@@ -52,11 +52,15 @@ class MyTweetService {
   }
 
   deleteAllTweets() {
-    return this.httpService.delete('api/tweets');
+    return this.httpService.delete('/api/tweets');
   }
 
   deleteUserTweets() {
-    return this.httpService.delete('api/users/' + id + '/tweets');
+    return this.httpService.delete('/api/users/' + id + '/tweets');
+  }
+
+  deleteOneTweet(id) {
+    return this.httpService.delete('/api/tweets/' + id);
   }
 }
 

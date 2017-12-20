@@ -3,6 +3,7 @@ const Assets = require('./app/controllers/assets');
 const Accounts = require('./app/controllers/accounts');
 const Admin = require('./app/controllers/admin');
 
+
 module.exports = [
 
   { method: 'GET', path: '/home', config: Tweets.home },
@@ -35,6 +36,6 @@ module.exports = [
   { method: 'POST', path: '/adminRegister', config: Admin.adminRegister },
   { method: 'GET', path: '/adminDeleteUser/{_id}', config: Admin.adminDeleteUser },
 
-  { method: 'POST', path: '/api/users/authenticate', config: UsersApi.authenticate },
+
 
 ];

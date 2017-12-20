@@ -28,9 +28,9 @@ exports.findOne = {
     User.findOne({ _id: request.params.id }).then(user => {
       if (!user) {
         return reply.status(404).end();
+      } else {
+        reply(user);
       }
-
-      reply(user);
     }).catch(err => {
       reply(Boom.notFound('id not found'));
     });

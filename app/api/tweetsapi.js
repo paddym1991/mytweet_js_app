@@ -12,7 +12,11 @@ exports.findOne = {
   auth: false,
   handler: function (req, res) {
     Tweet.findOne({ _id: req.params.id }).then(tweet => {
-      res(tweet);
+      if (tweet != null) {
+        res(tweet);
+      } else {
+        res(Boom.notFound('id not found'));
+      }
     }).catch(err => {
       res(Boom.notFound('Error finding tweet id: ' + err));
     });
@@ -37,7 +41,7 @@ exports.createTweet = {
   handler: function (req, res) {
     const tweet = new Tweet(req.payload);
     tweet.save().then(newTweet => {
-      Tweet.findOne(newTweet).populate('tweeter').then(tweet => {
+      Tweet.findOne(newTweet).then(tweet => {
         res(tweet).code(201);
       }); // res(newTweet).code(201);//201: HTTP code for resource created
     }).catch(err => {
