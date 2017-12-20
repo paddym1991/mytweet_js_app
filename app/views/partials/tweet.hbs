@@ -2,7 +2,7 @@
   <div class="ui grid ">
     <div class="ui form six wide column">
       <div class="ui segment">
-        <form action="/tweet" method="POST">
+        <form action="/tweet" method="POST" enctype="multipart/form-data">
           <div class="field">
             <label>Tweet</label>
             <textarea id="data" rows="4" placeholder="What's on your mind?" type="text" name="tweetText" maxlength="140" ></textarea>
@@ -13,6 +13,11 @@
           <div><br>
           <button class="ui blue submit button">Tweet</button>
           </div>
+
+          <div class="ui row"><br>
+            <input type="file" name="picture">
+          </div>
+
         </form>
         {{>formerror}}
       </div>
