@@ -11,6 +11,10 @@ const tweetSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  picture: {
+    data: Buffer,
+    contentType: String,
+  },
 });
 
 const Tweet = mongoose.model('Tweet', tweetSchema);
