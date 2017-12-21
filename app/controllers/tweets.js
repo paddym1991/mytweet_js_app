@@ -268,4 +268,32 @@ exports.follow = {
   },
 };
 
+exports.unfollow = {
+
+  handler: function (request, response) {
+    let loggedInUserEmail = request.auth.credentials.loggedInUser;
+    let followedUserId = request.params.id;
+    User.findOne({ email: loggedInUserEmail }).then(userUnFollowing => {
+      User.findOne({ _id: followedUserId }).then(userUnFollowed => {
+        userUnFollowing.following.splice(userUnFollowed._id, 1);
+        userUnFollowed.followers.splice(userUnFollowing._id, 1);
+        userUnFollowing.save();
+        userUnFollowed.save();
+        console.log('User unfollowed another user');
+        console.log(userUnFollowing.firstName + ' has unfollowed ' + userUnFollowed.firstName);
+        Tweet.find({tweeter: userUnFollowed._id}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
+          response.view('searcheduser', {
+            title: 'Tweets to date',
+            user: userUnFollowed,
+            tweets: allTweets,
+          });
+        });
+      });
+    }).catch(err => {
+      console.log(err);
+      response.redirect('/');
+    });
+  },
+};
+
 
