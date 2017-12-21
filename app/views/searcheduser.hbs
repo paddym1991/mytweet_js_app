@@ -5,6 +5,8 @@
     <h3 class="ui center aligned header">
       {{user.firstName}} {{user.lastName}}'s Timeline
     </h3>
+    <a href="/follow/{{user.id}}"><i class="add user icon"></i></a><br>
+    {{ user.followers.length }} Followers
   <div class="ui grid">
     <aside class="six wide column">
       <img src="images/twitterBird1.jpg" class="ui small image">

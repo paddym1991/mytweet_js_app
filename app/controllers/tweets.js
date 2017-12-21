@@ -240,4 +240,32 @@ exports.loggedInUserTimeline = {
   },
 };
 
+exports.follow = {
+
+  handler: function (request, response) {
+    let loggedInUserEmail = request.auth.credentials.loggedInUser;
+    let followedUserId = request.params.id;
+    User.findOne({ email: loggedInUserEmail }).then(userFollowing => {
+      User.findOne({ _id: followedUserId }).then(userFollowed => {
+        userFollowing.following.push(userFollowed._id);
+        userFollowed.followers.push(userFollowing._id);
+        userFollowing.save();
+        userFollowed.save();
+        console.log('User followed another user');
+        console.log(userFollowing.firstName + ' is now following ' + userFollowed.firstName);
+        Tweet.find({tweeter: userFollowed._id}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
+        response.view('searcheduser', {
+          title: 'Tweets to date',
+          user: userFollowed,
+          tweets: allTweets,
+        });
+        });
+      });
+    }).catch(err => {
+      console.log(err);
+      response.redirect('/');
+    });
+  },
+};
+
 

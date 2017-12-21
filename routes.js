@@ -3,7 +3,6 @@ const Assets = require('./app/controllers/assets');
 const Accounts = require('./app/controllers/accounts');
 const Admin = require('./app/controllers/admin');
 
-
 module.exports = [
 
   { method: 'GET', path: '/home', config: Tweets.home },
@@ -15,6 +14,7 @@ module.exports = [
   { method: 'GET', path: '/loggedinusertimeline', config: Tweets.loggedInUserTimeline },
 
   { method: 'GET', path: '/getpicture/{_id}', config: Tweets.getpicture },
+  { method: 'GET', path: '/follow/{id}', config: Tweets.follow },
 
     //to serve all files in the assets folder
   {
@@ -37,7 +37,5 @@ module.exports = [
   { method: 'GET', path: '/registeruseradmin', config: Admin.registeruseradmin },
   { method: 'POST', path: '/adminRegister', config: Admin.adminRegister },
   { method: 'GET', path: '/adminDeleteUser/{_id}', config: Admin.adminDeleteUser },
-
-
 
 ];
