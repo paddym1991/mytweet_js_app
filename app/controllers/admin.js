@@ -8,10 +8,16 @@ exports.main = {
   handler: function (request, reply) {
     User.find({}).then(allUsers => {
       Tweet.find({}).populate('user').populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
+        const numUsers = allUsers.length;
+        const numTweets = allTweets.length;
+        const tweetsPerUser = (numTweets / numUsers);
         reply.view('admindash', {
           title: 'Admin Dashboard',
           users: allUsers,
           tweets: allTweets,
+          numUsers: numUsers,
+          numTweets: numTweets,
+          tweetsPerUser: tweetsPerUser,
         });
       });
     });
