@@ -15,6 +15,7 @@ module.exports = [
 
   { method: 'GET', path: '/getpicture/{_id}', config: Tweets.getpicture },
   { method: 'GET', path: '/follow/{id}', config: Tweets.follow },
+  { method: 'GET', path: '/unfollow/{id}', config: Tweets.unfollow },
 
     //to serve all files in the assets folder
   {
