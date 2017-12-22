@@ -47,9 +47,9 @@ suite('User API tests', function () {
 
   test('delete a user', function () {
     const u = mytweetService.createUser(newUser);
-    assert(mytweetService.getUser(u._id) != null);
+    assert(mytweetService.getUser(u._id) !== null);
     mytweetService.deleteOneUser(u._id);
-    assert(mytweetService.getUser(u._id) == null);
+    assert(mytweetService.getUser(u._id) === null);
   });
 
   test('get all users', function () {

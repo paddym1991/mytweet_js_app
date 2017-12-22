@@ -48,9 +48,9 @@ suite('Tweet API tests', function () {
 
   test('delete a tweet', function () {
     const t = mytweetService.createTweet(newTweet);
-    assert(mytweetService.getTweet(t._id) != null);
+    assert(mytweetService.getTweet(t._id) !== null);
     mytweetService.deleteOneTweet(t._id);
-    assert(mytweetService.getTweet(t._id) == null);
+    assert(mytweetService.getTweet(t._id) === null);
   });
 
   test('get all tweets', function () {
