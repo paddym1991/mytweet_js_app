@@ -1,7 +1,11 @@
 <div class="ui card">
-  <div class="image">
-    <img src="">
-  </div>
+  {{#if user.picture.data}}
+    <div class="image">
+      <img src="/getPic/{{user.id}}" height="150" width="150" />
+    </div>
+    {{else}}
+      <img class="ui medium centered image" src="images/user.png"/>
+  {{/if}}
   <div class="content">
     <h3>{{user.firstName}} {{user.lastName}}</h3>
   </div>
