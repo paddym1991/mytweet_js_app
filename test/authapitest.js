@@ -7,7 +7,7 @@ const fixtures = require('./fixtures.json');
 //These will help us validate the token (for test purposes), but they are not exposed as part of the api.
 const utils = require('../app/api/utils.js');
 
-suite('Users API tests', function () {
+suite('Auth API tests', function () {
 
   let users = fixtures.users;
   let newUser = fixtures.newUser;

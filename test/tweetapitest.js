@@ -12,7 +12,7 @@ suite('Tweet API tests', function () {
   let tweets = fixtures.tweets;
   let newTweet = fixtures.newTweet;
 
-  const mytweetService = new MyTweetService('http://localhost:4000');
+  const mytweetService = new MyTweetService(fixtures.myTweetService);
 
   //These (beforeEach & afterEach) are run before and after each test - clearing our the candidates
   // model so that each test can be considered completely independently

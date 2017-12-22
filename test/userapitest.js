@@ -11,7 +11,7 @@ suite('User API tests', function () {
   let users = fixtures.users;
   let newUser = fixtures.newUser;
 
-  const mytweetService = new MyTweetService('http://localhost:4000');
+  const mytweetService = new MyTweetService(fixtures.myTweetService);
 
   //These (beforeEach & afterEach) are run before and after each test - clearing our the candidates
   // model so that each test can be considered completely independently

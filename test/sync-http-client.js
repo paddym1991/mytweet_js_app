@@ -12,6 +12,7 @@ class SyncHttpService {
 
   constructor(baseUrl) {
     this.baseUrl = baseUrl;
+    this.authHeadder = null;
   }
 
   /**

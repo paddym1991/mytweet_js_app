@@ -2,6 +2,9 @@
 
 const Hapi = require('hapi');
 
+//make app accessible from an SPA. import 'hapi-cors'
+const corsHeaders = require('hapi-cors-headers');
+
 const server = new Hapi.Server();
 server.connection({ port: process.env.PORT || 4000 });
 
