@@ -24,7 +24,10 @@
         <tbody>
         {{#each tweets}}
           <tr>
-            <td> {{tweetText}} </td>
+            <td> {{tweetText}}
+              {{#if picture.data}}
+                <img class="ui small image" src="/getpicture/{{{_id}}}"><br>
+              {{/if}}</td>
             <td> {{date}} </td>
             <td> {{tweeter.firstName}} {{tweeter.lastName}} </td>
           </tr>
