@@ -11,6 +11,10 @@ const userSchema = mongoose.Schema({
   lastName: String,
   email: String,
   password: String,
+  picture: {
+    data: Buffer,
+    contentType: String,
+  },
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
