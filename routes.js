@@ -33,6 +33,8 @@ module.exports = [
   { method: 'POST', path: '/register', config: Accounts.register },   //Post route to register users
   { method: 'GET', path: '/settings', config: Accounts.viewSettings },
   { method: 'POST', path: '/settings', config: Accounts.updateSettings },
+  { method: 'POST', path: '/profilePic', config: Accounts.profilePic },
+  { method: 'GET', path: '/getPic/{id}', config: Accounts.getPic },
 
   { method: 'GET', path: '/admindash', config: Admin.main },
   { method: 'GET', path: '/registeruseradmin', config: Admin.registeruseradmin },
