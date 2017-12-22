@@ -30,7 +30,35 @@
       </div>
     </div>
     <aside class="ui five wide column">
-      <img src="images/twitterBird2.jpg" class="ui medium image">
+      {{#if user.picture.data}}
+        <div class="image">
+          <img id="new" src="/getPic/{{user.id}}" height="250" width="300" />
+        </div>
+      {{else}}
+        <img class="ui medium centered image" src="images/user.png"/>
+      {{/if}}
+
+      <form action="/profilePic" enctype="multipart/form-data" method="POST">
+        <input type="file" name="picture" onchange="readURL(this);">
+        <button class="ui blue submit button">Save</button>
+      </form>
     </aside>
   </div>
 </section>
+
+
+<!-- https://stackoverflow.com/questions/12368910/html-display-image-after-selecting-filename -->
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      let reader = new FileReader();
+      reader.onload = function (e) {
+        $('#new')
+            .attr('src', e.target.result)
+            .width(300)
+            .height(250);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>

@@ -231,3 +231,30 @@ exports.updateSettings = {
   },
 
 };
+
+exports.profilePic = {
+  handler: function (request, response) {
+    let loggedInUserEmail = request.auth.credentials.loggedInUser;
+    let profilePic = request.payload.picture;
+    User.findOne({ email: loggedInUserEmail }).then(user => {
+      if (profilePic.length) {
+        user.picture.data = profilePic;
+        user.save();
+      }
+      response.redirect('/settings');
+    }).catch(err => {
+      response.redirect('/');
+    });
+  },
+};
+
+exports.getPic = {
+  handler: function (request, response) {
+    let userId = request.params.id;
+    User.findOne({ _id: userId }).then(user => {
+      response(user.picture.data).type('image');
+    }).catch(err => {
+      response.redirect('/');
+    });
+  },
+};

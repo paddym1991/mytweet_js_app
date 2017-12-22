@@ -10,7 +10,13 @@ const Joi = require('joi');
 exports.home = {
 
   handler: function (request, reply) {
-    reply.view('home', { title: 'Welcome to Tweeterville' });
+    //reply.view('home', { title: 'Welcome to Tweeterville' });
+    let loggedInUserEmail = request.auth.credentials.loggedInUser;
+    User.findOne({ email: loggedInUserEmail }).then(foundUser => {
+      reply.view('home', {title: 'Welcome to Tweeterville', user: foundUser });
+    }).catch(err => {
+      reply.redirect('/');
+    });
   },
 
 };
