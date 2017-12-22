@@ -14,6 +14,34 @@ class SyncHttpService {
     this.baseUrl = baseUrl;
   }
 
+  /**
+   * setAuth requests a token from the server, and stores in in an authHeader property.
+   * get, post and delete then include this header as part of all requests
+   * @param url
+   * @param user
+   * @returns {boolean}
+   */
+  setAuth(url, user) {
+    const res = request('POST', this.baseUrl + url, { json: user });
+    if (res.statusCode == 201) {
+      let payload = JSON.parse(res.getBody('utf8'));
+      if (payload.success) {
+        this.authHeadder = { Authorization: 'bearer ' + payload.token, };
+        return true;
+      }
+    }
+
+    this.authHeadder = null;
+    return false;
+  }
+
+  /**
+   * clearAuth clears out the authHeader token
+   */
+  clearAuth() {
+    this.authHeadder = null;
+  }
+
   get(url) {
     let returnedObj = null;
     let res = request('GET', this.baseUrl + url);
