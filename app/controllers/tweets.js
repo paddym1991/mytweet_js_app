@@ -72,10 +72,16 @@ exports.tweet = {
 
     //This is the handler to invoke if one or more of the fields fails the validation
     failAction: function (request, reply, source, error) {
-      reply.view('home', {
-        title: 'Tweet error',
-        errors: error.data.details,
-      }).code(400);
+      let userEmail = request.auth.credentials.loggedInUser;
+      User.findOne({ email: userEmail }).then(foundUser => {
+        reply.view('home', {
+          title: 'Tweet error',
+          user: foundUser,
+          errors: error.data.details,
+        }).code(400);
+      }).catch(err => {
+        reply.redirect('/');
+      });
     },
 
     //have the component report all errors and not just one
