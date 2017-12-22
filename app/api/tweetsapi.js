@@ -6,6 +6,7 @@
 
 const Tweet = require('../models/tweet');
 const Boom = require('boom');
+const utils = require('./utils.js');
 
 //api method to find one tweet
 exports.findOne = {
@@ -55,8 +56,9 @@ exports.createTweet = {
 
   handler: function (req, res) {
     const tweet = new Tweet(req.payload);
+    tweet.tweeter = utils.getUserIdFromRequest(request);
     tweet.save().then(newTweet => {
-      Tweet.findOne(newTweet).then(tweet => {
+      return Tweet.findOne(newTweet).populate('tweeter').then(tweet => {
         res(tweet).code(201);
       }); // res(newTweet).code(201);//201: HTTP code for resource created
     }).catch(err => {
