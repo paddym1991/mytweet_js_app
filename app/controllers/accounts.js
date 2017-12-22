@@ -252,7 +252,7 @@ exports.getPic = {
   handler: function (request, response) {
     let userId = request.params.id;
     User.findOne({ _id: userId }).then(user => {
-      reply(user.picture.data).type('image');
+      response(user.picture.data).type('image');
     }).catch(err => {
       response.redirect('/');
     });
