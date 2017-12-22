@@ -16,17 +16,19 @@ suite('User API tests', function () {
   //These (beforeEach & afterEach) are run before and after each test - clearing our the candidates
   // model so that each test can be considered completely independently
   beforeEach(function () {
-    mytweetService.deleteAllUsers();
+    mytweetService.login(users[0]);
+    //mytweetService.deleteAllUsers();
   });
 
   afterEach(function () {
-    mytweetService.deleteAllUsers();
+    //mytweetService.deleteAllUsers();
+    mytweetService.logout();
   });
 
   //simplified test with lodash
   test('create a user', function () {
     const returnedUser = mytweetService.createUser(newUser);
-    assert(_.some([returnedUser], newUser), 'returned User must be a superset of newUser');
+    assert(_.some([returnedUser], newUser), 'returnedUser must be a superset of newUser');
     assert.isDefined(returnedUser._id);
   });
 

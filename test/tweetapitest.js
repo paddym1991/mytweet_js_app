@@ -8,6 +8,7 @@ const _ = require('lodash');
 
 suite('Tweet API tests', function () {
 
+  let users = fixtures.users;
   let tweets = fixtures.tweets;
   let newTweet = fixtures.newTweet;
 
@@ -16,11 +17,13 @@ suite('Tweet API tests', function () {
   //These (beforeEach & afterEach) are run before and after each test - clearing our the candidates
   // model so that each test can be considered completely independently
   beforeEach(function () {
+    mytweetService.login(users[0]);
     mytweetService.deleteAllTweets();
   });
 
   afterEach(function () {
     mytweetService.deleteAllTweets();
+    mytweetService.logout();
   });
 
   //simplified test with lodash
