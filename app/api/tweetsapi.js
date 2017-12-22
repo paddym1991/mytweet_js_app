@@ -9,7 +9,12 @@ const Boom = require('boom');
 
 //api method to find one tweet
 exports.findOne = {
-  auth: false,
+
+  //auth: false,
+  auth: {
+    strategy: 'jwt',
+  },
+
   handler: function (req, res) {
     Tweet.findOne({ _id: req.params.id }).then(tweet => {
       if (tweet != null) {
@@ -25,7 +30,12 @@ exports.findOne = {
 
 //api method to find all tweets
 exports.findAllTweets = {
-  auth: false,
+
+  //auth: false,
+  auth: {
+    strategy: 'jwt',
+  },
+
   handler: function (req, res) {
     Tweet.find({}).exec().populate('tweeter').then(tweets => {
       res(tweets);
@@ -37,7 +47,12 @@ exports.findAllTweets = {
 
 //api method to create a new tweet
 exports.createTweet = {
-  auth: false,
+
+  //auth: false,
+  auth: {
+    strategy: 'jwt',
+  },
+
   handler: function (req, res) {
     const tweet = new Tweet(req.payload);
     tweet.save().then(newTweet => {
@@ -52,7 +67,12 @@ exports.createTweet = {
 
 //api method to delete one tweet
 exports.deleteOne = {
-  auth: false,
+
+  //auth: false,
+  auth: {
+    strategy: 'jwt',
+  },
+
   handler: function (req, res) {
     Tweet.remove({_id: req.params.id}).then(tweet => {
       res(tweet).code(204);//204: code for no content, ensures deletion
@@ -64,7 +84,12 @@ exports.deleteOne = {
 
 //api method to delete all tweets
 exports.deleteAllTweets = {
-  auth: false,
+
+  //auth: false,
+  auth: {
+    strategy: 'jwt',
+  },
+
   handler: function (req, res) {
     Tweet.remove({}).then(err => {
       res().code(204);
@@ -76,7 +101,10 @@ exports.deleteAllTweets = {
 
 exports.deleteUserTweets = {
 
-  auth: false,
+  //auth: false,
+  auth: {
+    strategy: 'jwt',
+  },
 
   handler: function (request, reply) {
     Tweet.remove({ user: request.params.id }).then(err => {
