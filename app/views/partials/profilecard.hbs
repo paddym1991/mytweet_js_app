@@ -7,10 +7,15 @@
       <img class="ui medium centered image" src="images/user.png"/>
   {{/if}}
   <div class="content">
-    <h3>{{user.firstName}} {{user.lastName}}</h3>
+    <h3>{{#if loggedInUser}}
+      {{user.firstName}} {{user.lastName}}</h3>
+        {{else}}
+      {{user.firstName}} {{user.lastName}} <button class="ui small submit button">Follow <a href="/follow/{{user.id}}"><i class="add user icon"></i></a><br></button>
+      {{/if}}
   </div>
   <div class="extra content">
-    <i class="user icon"></i> Followers <br>
-    <i class="user icon"></i> Following
+    {{#if user}}{{/if}}
+    <i class="user icon"></i>{{ user.followers.length }} Follower(s) <br>
+    <i class="user icon"></i>{{ user.following.length }} Following
   </div>
 </div>

@@ -5,6 +5,9 @@
     <h3 class="ui center aligned header">
       {{user.firstName}} {{user.lastName}}'s Timeline
     </h3>
+    <div class="six wide column">
+      {{>profilecard}}
+    </div>
     <a href="/follow/{{user.id}}"><i class="add user icon"></i></a><br>
     <a href="/unfollow/{{user.id}}"><i class="red remove user icon"></i></a><br>
     {{ user.followers.length }} Followers

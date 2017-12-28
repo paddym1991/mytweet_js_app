@@ -5,6 +5,12 @@
     <h3 class="ui center aligned header">
       {{user.firstName}} {{user.lastName}}'s Timeline
     </h3>
+    <div class="six wide column">
+      {{>profilecard}}
+    </div>
+    <a href="/follow/{{user.id}}"><i class="add user icon"></i></a><br>
+    <a href="/unfollow/{{user.id}}"><i class="red remove user icon"></i></a><br>
+    {{ user.followers.length }} Followers
     <div class="ui grid">
       <aside class="six wide column">
         <img src="images/twitterBird1.jpg" class="ui small image">
@@ -21,7 +27,10 @@
           <tbody>
           {{#each tweets}}
             <tr>
-              <td> {{tweetText}} </td>
+              <td> {{tweetText}}
+                {{#if picture.data}}
+                  <img class="ui small image" src="/getpicture/{{{_id}}}"><br>
+                {{/if}}</td>
               <td> {{date}} </td>
               <td> {{tweeter.firstName}} {{tweeter.lastName}} </td>
             </tr>
