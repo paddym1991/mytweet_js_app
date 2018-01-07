@@ -121,10 +121,10 @@ exports.deleteUserTweets = {
 
 exports.personalTweets = {
 
-   //auth: false,
-   auth: {
-     strategy: jwt,
-   },
+  //auth: false,
+  auth: {
+    strategy: 'jwt',
+  },
 
   handler: function (request, reply) {
     User.findOne({ _id: request.params.id }).then(user => {
