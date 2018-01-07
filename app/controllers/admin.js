@@ -66,11 +66,20 @@ exports.adminRegister = {
 
   handler: function  (request, reply) {
     const user = new User(request.payload);
+    const plaintextPassword = user.password;
 
-    user.save().then(newUser => {
-      reply.redirect('/admindash');
-    }).catch(err => {
-      reply.redirect('/');
+    // user.save().then(newUser => {
+    //   reply.redirect('/admindash');
+    // }).catch(err => {
+    //   reply.redirect('/');
+    bcrypt.hash(plaintextPassword, saltRounds, function (err, hash) {
+      user.password = hash;
+      return user.save().then(newUser => {
+        console.log('New User added');
+        reply.redirect('/adminhome');
+      }).catch(err => {
+        reply.redirect('/');
+      });
     });
     console.log('registering user as admin');
     console.log(user);

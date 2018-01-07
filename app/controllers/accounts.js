@@ -3,6 +3,8 @@
 //account controller can now require the user model
 const User = require('../models/user');
 const Joi = require('joi');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 exports.main = {
 
@@ -56,14 +58,18 @@ exports.register = {
 
   handler: function  (request, reply) {
     const user = new User(request.payload);
+    const plaintextPassword = user.password;
 
-    user.save().then(newUser => {
-      reply.redirect('/login');
-    }).catch(err => {
-      reply.redirect('/');
+    bcrypt.hash(plaintextPassword, saltRounds, function (err, hash) {
+      user.password = hash;
+      user.save().then(newUser => {
+        reply.redirect('/login');
+      }).catch(err => {
+        reply.redirect('/');
+      });
+      console.log('this is registering');
+      console.log(user);
     });
-    console.log('this is registering');
-    console.log(user);
   },
 
 };
@@ -113,35 +119,47 @@ exports.authenticate = {
     const user = request.payload;
 
     //check if any users in db match the email passed in. If so they become the foundUser
-    User.findOne({ email: user.email }).then(foundUser => {
+   // User.findOne({email: user.email}).then(foundUser => {
       //if the found user's details match the admin account then log in as admin
-      if ((user.email === 'admin@istrator.com') && (user.password === 'secret')) {
+      if ((user.email == 'admin@istrator.com') && (user.password == 'secret')) {
         request.cookieAuth.set({
           loggedIn: true,
           loggedInUser: user.email,
         });
         console.log('Admin authenticating');
-        console.log(foundUser);
+        //console.log(foundUser);
         reply.redirect('/admindash');
 
         //if found user's details match any other user then log them in as a normal user
-      }else if (foundUser && foundUser.password === user.password) {
-        request.cookieAuth.set({    //setting a session cookie after user credentials are verified
-          loggedIn: true,
-          loggedInUser: user.email,
-        });
-        console.log('User is authenticating');
-        console.log(foundUser);
-        reply.redirect('/home');
+        // }else if (foundUser && foundUser.password === user.password) {
+        //   request.cookieAuth.set({    //setting a session cookie after user credentials are verified
+        //     loggedIn: true,
+        //     loggedInUser: user.email,
+        //   });
+        //   console.log('User is authenticating');
+        //   console.log(foundUser);
+        //   reply.redirect('/home');
+        // } else {
+        //   reply.redirect('/signup');
+        // }
       } else {
-        reply.redirect('/signup');
+        User.findOne({email: user.email}).then(foundUser => {
+          bcrypt.compare(user.password, foundUser.password, function (err, isValid) {
+            if (isValid) {
+              request.cookieAuth.set({
+                loggedIn: true,
+                loggedInUser: user.email,
+              });
+              reply.redirect('/home');
+            } else {
+              reply.redirect('/signup');
+            }
+          });
+        }).catch(err => {
+          reply.redirect('/');
+        });
       }
-    }).catch(err => {
-      reply.redirect('/');
-    });
-
-  },
-
+    },
 };
 
 /**
@@ -221,8 +239,14 @@ exports.updateSettings = {
       user.firstName = editedUser.firstName;
       user.lastName = editedUser.lastName;
       user.email = editedUser.email;
-      user.password = editedUser.password;
-      return user.save();     //return a promise from the save() function - and then re render the updated user details to the settings view.
+      // user.password = editedUser.password;
+      // return user.save();     //return a promise from the save() function - and then re render the updated user details to the settings view.
+      bcrypt.hash(editedUser.password, saltRounds, function (err, hash) {
+        user.password = hash;
+        user.save();
+      });
+
+      return user;
     }).then(user => {
       console.log(user.firstName + "'s account edited");
       console.log(user);
