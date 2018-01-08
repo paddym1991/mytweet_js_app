@@ -10,7 +10,7 @@
     <h3>{{#if loggedInUser}}
       {{user.firstName}} {{user.lastName}}</h3>
         {{else}}
-  {{user.firstName}} {{user.lastName}} <button class="ui small submit button">Follow <a href="/follow/{{user.id}}"><i class="add user icon"></i></a><br></button></h3>
+  {{user.firstName}} {{user.lastName}} <button class="ui small submit button">Follow <a href="/follow/{{user.id}}"><i class="add user icon"></i></a></button><button class="ui small submit button">UnFollow <a href="/unfollow/{{user.id}}"><i class="red remove user icon"></i></a><br></button></h3>
       {{/if}}
   </div>
   <div class="extra content">
